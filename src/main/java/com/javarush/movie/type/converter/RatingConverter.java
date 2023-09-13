@@ -1,6 +1,6 @@
-package com.javarush.movie.converter;
+package com.javarush.movie.type.converter;
 
-import com.javarush.movie.entity.Rating;
+import com.javarush.movie.type.Rating;
 import jakarta.persistence.AttributeConverter;
 import jakarta.persistence.Converter;
 
@@ -8,6 +8,7 @@ import java.util.Arrays;
 
 @Converter
 public class RatingConverter implements AttributeConverter<Rating, String> {
+
     @Override
     public String convertToDatabaseColumn(Rating rating) {
         return rating.getName();

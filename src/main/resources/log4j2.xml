@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="info">
+    <Properties>
+        <Property name="BaseDir">logs</Property>
+        <Property name="LogPattern">%d{yyyy-MM-dd HH:mm:ss,SSS} %level %logger{36}: %msg%n</Property>
+    </Properties>
+    <Appenders>
+        <RollingFile name="RollingFile" fileName="${BaseDir}/hibernate2.log" filePattern="${BaseDir}/hibernate2.%d{yyyy-MM-dd}.log">
+            <PatternLayout pattern="${LogPattern}"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy />
+            </Policies>
+            <DefaultRolloverStrategy>
+                <Delete basePath="${BaseDir}" maxDepth="2">
+                    <IfFileName glob="hibernate2.*.log"/>
+                    <IfLastModified age="P7D"/>
+                </Delete>
+            </DefaultRolloverStrategy>
+        </RollingFile>
+        <Console name="Console" target="SYSTEM_OUT" follow="true">
+            <PatternLayout pattern="${LogPattern}"/>
+        </Console>
+    </Appenders>
+    <Loggers>
+        <Root level="info">
+            <AppenderRef ref="RollingFile"/>
+            <AppenderRef ref="Console"/>
+        </Root>
+    </Loggers>
+</Configuration>

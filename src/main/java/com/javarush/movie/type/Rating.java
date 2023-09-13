@@ -1,11 +1,11 @@
-package com.javarush.movie.entity;
+package com.javarush.movie.type;
 
 public enum Rating {
     G("G"),
     PG("PG"),
-    PG13("PG-13"),
+    PG_13("PG-13"),
     R("R"),
-    NC17("NC-17");
+    NC_17("NC-17");
 
     private final String name;
 

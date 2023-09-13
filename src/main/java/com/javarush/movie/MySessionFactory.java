@@ -23,14 +23,20 @@ public class MySessionFactory {
         properties.put(Environment.AUTOCOMMIT, true);
         properties.put(Environment.SHOW_SQL, true);
         properties.put(Environment.FORMAT_SQL, true);
-//        properties.put("hibernate.connection.useUnicode", true);
-//        properties.put("hibernate.connection.characterEncoding", "UTF-8");
-//        properties.put("hibernate.connection.charSet", "UTF-8");
 
         sessionFactory = new Configuration()
                 .setProperties(properties)
-                .addAnnotatedClass(Language.class)
+                .addAnnotatedClass(Actor.class)
+                .addAnnotatedClass(Address.class)
+                .addAnnotatedClass(Category.class)
+                .addAnnotatedClass(City.class)
+                .addAnnotatedClass(Country.class)
+
                 .addAnnotatedClass(Film.class)
+                .addAnnotatedClass(FilmText.class)
+
+                .addAnnotatedClass(Language.class)
+
                 .buildSessionFactory();
     }
 
