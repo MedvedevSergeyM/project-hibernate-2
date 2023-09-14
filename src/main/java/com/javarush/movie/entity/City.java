@@ -27,7 +27,7 @@ public class City extends LastUpdate {
             foreignKeyDefinition = "foreign key (country_id) references country (country_id) on update cascade"))
     private Country country;
 
-    @OneToMany(mappedBy = "city", cascade = CascadeType.ALL)
-    private Set<Address> addresses = new HashSet<>();
+//    @OneToMany(mappedBy = "city", cascade = CascadeType.ALL)
+//    private Set<Address> addresses = new HashSet<>();
 
 }

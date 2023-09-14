@@ -23,15 +23,8 @@ public class Category extends LastUpdate {
     @Column(length = 25, nullable = false)
     private String name;
 
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name="film_category",
-            joinColumns =  @JoinColumn(name="category_id", referencedColumnName="category_id"),
-            inverseJoinColumns= @JoinColumn(name="film_id", referencedColumnName="film_id"),
-            foreignKey = @ForeignKey(name = "fk_film_category_category",
-                    foreignKeyDefinition = "foreign key (category_id) references category (category_id) on update cascade"),
-            inverseForeignKey = @ForeignKey(name = "fk_film_category_film",
-                    foreignKeyDefinition = "foreign key (film_id) references film (film_id) on update cascade"))
+    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "categories")
     @LazyCollection(LazyCollectionOption.EXTRA)
-    private Set<Film> categories = new HashSet<>();
+    private Set<Film> films = new HashSet<>();
 
 }

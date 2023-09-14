@@ -15,10 +15,9 @@ public class FilmText {
     @Column(name = "film_id", columnDefinition = "smallint")
     private Integer id;
 
-    // TODO: OneToOne
-//    @OneToOne
-//    @JoinColumn(name = "film_id")
-//    private Film film;
+    @OneToOne(cascade = CascadeType.ALL, mappedBy="filmText")
+    private Film film;
+
 
     @Column(nullable = false)
     private String title;

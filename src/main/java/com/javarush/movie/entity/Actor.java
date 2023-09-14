@@ -29,11 +29,18 @@ public class Actor extends LastUpdate {
     @Column(name = "last_name", length = 45, nullable = false)
     private String lastName;
 
+    // TODO: last_update
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name="film_actor",
             joinColumns=  @JoinColumn(name="actor_id", referencedColumnName="actor_id"),
-            inverseJoinColumns= @JoinColumn(name="film_id", referencedColumnName="film_id"))
+            inverseJoinColumns= @JoinColumn(name="film_id", referencedColumnName="film_id"),
+            foreignKey = @ForeignKey(name = "fk_film_actor_film",
+                    foreignKeyDefinition = "foreign key (film_id) references film (film_id) on update cascade"),
+            inverseForeignKey = @ForeignKey(name = "fk_film_actor_actor",
+                    foreignKeyDefinition = "foreign key (actor_id) references actor (actor_id) on update cascade"),
+            indexes = {@Index(name = "idx_fk_film_id", columnList = "film_id")}
+    )
     @LazyCollection(LazyCollectionOption.EXTRA)
-    private Set<Film> categories = new HashSet<>();
+    private Set<Film> films = new HashSet<>();
 
 }

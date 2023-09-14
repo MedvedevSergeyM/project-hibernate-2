@@ -78,28 +78,24 @@ public class Film extends LastUpdate {
 
     // TODO: last_update
     @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name="film_category",
-            joinColumns =  @JoinColumn(name="film_id", referencedColumnName="film_id"),
-            inverseJoinColumns = @JoinColumn(name="category_id", referencedColumnName="category_id"))
+    @JoinTable(name="film_category"
+            , joinColumns =  @JoinColumn(name="film_id", referencedColumnName="film_id")
+            , inverseJoinColumns = @JoinColumn(name="category_id", referencedColumnName="category_id")
+            , foreignKey = @ForeignKey(name = "fk_film_category_category",
+                    foreignKeyDefinition = "foreign key (category_id) references category (category_id) on update cascade")
+            , inverseForeignKey = @ForeignKey(name = "fk_film_category_film",
+                    foreignKeyDefinition = "foreign key (film_id) references film (film_id) on update cascade")
+    )
     @LazyCollection(LazyCollectionOption.EXTRA)
     private Set<Category> categories = new HashSet<>();
 
-    // TODO: last_update
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(name = "film_actor",
-            joinColumns =  @JoinColumn(name = "film_id", referencedColumnName = "film_id"),
-            inverseJoinColumns = @JoinColumn(name = "actor_id", referencedColumnName = "actor_id"),
-            foreignKey = @ForeignKey(name = "fk_film_actor_film",
-                    foreignKeyDefinition = "foreign key (film_id) references film (film_id) on update cascade"),
-            inverseForeignKey = @ForeignKey(name = "fk_film_actor_actor",
-                    foreignKeyDefinition = "foreign key (actor_id) references actor (actor_id) on update cascade"),
-            indexes = {@Index(name = "idx_fk_film_id", columnList = "film_id")})
+    @ManyToMany(cascade = CascadeType.ALL, mappedBy = "films")
     @LazyCollection(LazyCollectionOption.EXTRA)
     private Set<Actor> actors = new HashSet<>();
 
-    // TODO: FilmText
-//    @OneToOne(cascade = CascadeType.ALL, mappedBy="film")
-//    private FilmText filmText;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "film_id", referencedColumnName = "film_id")
+    private FilmText filmText;
 
     @PrePersist
     protected void prePersist() {

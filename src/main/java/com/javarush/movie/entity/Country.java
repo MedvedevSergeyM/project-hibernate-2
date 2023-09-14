@@ -21,7 +21,7 @@ public class Country extends LastUpdate {
     @Column(length = 50, nullable = false)
     private String country;
 
-    @OneToMany(mappedBy = "country", cascade = CascadeType.ALL)
-    private Set<City> cities = new HashSet<>();
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "country")
+//    private Set<City> cities = new HashSet<>();
 
 }
