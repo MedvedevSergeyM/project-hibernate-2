@@ -13,7 +13,7 @@ public class FilmText {
 
     @Id
     @Column(name = "film_id", columnDefinition = "smallint")
-    private Integer id;
+    private Short id;
 
     @OneToOne(cascade = CascadeType.ALL, mappedBy="filmText")
     private Film film;

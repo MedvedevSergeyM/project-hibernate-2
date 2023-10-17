@@ -16,14 +16,14 @@ public class Store extends LastUpdate {
     @Column(name = "store_id", columnDefinition = "tinyint unsigned")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Byte id;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "manager_staff_id", nullable = false, foreignKey = @ForeignKey(name = "fk_store_staff",
             foreignKeyDefinition = "foreign key (manager_staff_id) references staff (staff_id) on update cascade"))
     private Staff managerStaff;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "address_id", nullable = false, foreignKey = @ForeignKey(name = "fk_store_address",
             foreignKeyDefinition = "foreign key (address_id) references address (address_id) on update cascade"))
     private Address address;

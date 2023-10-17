@@ -18,7 +18,7 @@ public class Category extends LastUpdate {
     @Column(name = "category_id", columnDefinition = "tinyint unsigned")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Short id;
 
     @Column(length = 25, nullable = false)
     private String name;

@@ -3,6 +3,7 @@ package com.javarush.movie.entity;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.Type;
 
 import java.time.LocalDateTime;
 
@@ -20,7 +21,7 @@ public class Customer extends LastUpdate {
     @Column(name = "customer_id", columnDefinition = "smallint unsigned")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Short id;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "store_id", nullable = false, foreignKey = @ForeignKey(name = "fk_customer_store",
@@ -41,7 +42,9 @@ public class Customer extends LastUpdate {
             foreignKeyDefinition = "foreign key (address_id) references address (address_id) on update cascade"))
     private Address address;
 
-    @Column(nullable = false, columnDefinition = "tinyint(1) default 1")
+//  TODO:    @Column(nullable = false, columnDefinition = "tinyint(1) default 1")
+    @Column(nullable = false, columnDefinition = "BIT")
+    @Type(type = "org.hibernate.type.NumericBooleanType")
     private Boolean active;
 
     @Column(name = "create_date", nullable = false, columnDefinition = "datetime")

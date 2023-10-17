@@ -1,6 +1,6 @@
-package com.javarush.movie.type.converter;
+package com.javarush.movie.entity.type.converter;
 
-import com.javarush.movie.type.SpecialFeature;
+import com.javarush.movie.entity.type.SpecialFeature;
 import jakarta.persistence.AttributeConverter;
 import jakarta.persistence.Converter;
 

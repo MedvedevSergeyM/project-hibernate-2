@@ -1,9 +1,9 @@
 package com.javarush.movie.entity;
 
-import com.javarush.movie.type.converter.RatingConverter;
-import com.javarush.movie.type.converter.SpecialFeaturesConverter;
-import com.javarush.movie.type.Rating;
-import com.javarush.movie.type.SpecialFeature;
+import com.javarush.movie.entity.type.converter.RatingConverter;
+import com.javarush.movie.entity.type.converter.SpecialFeaturesConverter;
+import com.javarush.movie.entity.type.Rating;
+import com.javarush.movie.entity.type.SpecialFeature;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -13,7 +13,7 @@ import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
+import java.time.Year;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -31,7 +31,7 @@ public class Film extends LastUpdate {
     @Column(name = "film_id", columnDefinition = "smallint unsigned")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Short id;
 
     @Column(length = 128, nullable = false)
     private String title;
@@ -40,7 +40,7 @@ public class Film extends LastUpdate {
     private String description;
 
     @Column(name = "release_year", columnDefinition = "year")
-    private LocalDate releaseYear;
+    private Year year;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "language_id", nullable = false, foreignKey = @ForeignKey(name = "fk_film_language",
@@ -54,14 +54,14 @@ public class Film extends LastUpdate {
 
     @Column(name = "rental_duration", columnDefinition = "tinyint unsigned", nullable = false)
     @ColumnDefault("3")
-    private Short rentalDuration;
+    private Byte rentalDuration;
 
     @Column(name="rental_rate", columnDefinition="decimal(4, 2)", nullable = false)
     @ColumnDefault("4.99")
     private BigDecimal rentalRate;
 
     @Column(columnDefinition = "smallint unsigned")
-    private Integer length;
+    private Short length;
 
     @Column(name="replacement_cost", columnDefinition="decimal(5, 2)", nullable = false)
     @ColumnDefault("19.99")

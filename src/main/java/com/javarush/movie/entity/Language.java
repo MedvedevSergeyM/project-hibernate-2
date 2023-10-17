@@ -13,7 +13,7 @@ public class Language extends LastUpdate {
     @Column(name = "language_id", columnDefinition = "tinyint unsigned")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Byte id;
 
     @Column(columnDefinition = "char(20)", nullable = false)
     private String name;

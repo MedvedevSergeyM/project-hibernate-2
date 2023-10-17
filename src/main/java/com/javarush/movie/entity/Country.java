@@ -16,10 +16,10 @@ public class Country extends LastUpdate {
     @Column(name = "country_id", nullable = false, columnDefinition = "smallint unsigned")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Short id;
 
-    @Column(length = 50, nullable = false)
-    private String country;
+    @Column(name = "country", length = 50, nullable = false)
+    private String name;
 
 //    @OneToMany(cascade = CascadeType.ALL, mappedBy = "country")
 //    private Set<City> cities = new HashSet<>();

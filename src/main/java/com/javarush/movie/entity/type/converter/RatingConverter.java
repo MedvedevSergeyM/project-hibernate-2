@@ -1,6 +1,6 @@
-package com.javarush.movie.type.converter;
+package com.javarush.movie.entity.type.converter;
 
-import com.javarush.movie.type.Rating;
+import com.javarush.movie.entity.type.Rating;
 import jakarta.persistence.AttributeConverter;
 import jakarta.persistence.Converter;
 

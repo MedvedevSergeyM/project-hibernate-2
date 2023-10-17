@@ -1,4 +1,4 @@
-package com.javarush.movie.type;
+package com.javarush.movie.entity.type;
 
 import java.util.Arrays;
 

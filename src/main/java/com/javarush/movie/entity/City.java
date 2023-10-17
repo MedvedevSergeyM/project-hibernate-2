@@ -17,10 +17,10 @@ public class City extends LastUpdate {
     @Column(name = "city_id", columnDefinition = "smallint unsigned")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Short id;
 
-    @Column(length = 50, nullable = false)
-    private String city;
+    @Column(name = "city", length = 50, nullable = false)
+    private String name;
 
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "country_id", nullable = false, foreignKey = @ForeignKey(name = "fk_city_country",

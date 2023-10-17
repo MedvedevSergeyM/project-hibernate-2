@@ -21,7 +21,7 @@ public class Actor extends LastUpdate {
     @Column(name = "actor_id", columnDefinition = "smallint unsigned")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Short id;
 
     @Column(name = "first_name", length = 45, nullable = false)
     private String firstName;

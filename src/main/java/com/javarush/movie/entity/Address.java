@@ -14,7 +14,7 @@ public class Address extends LastUpdate {
     @Column(name = "address_id", columnDefinition = "smallint unsigned")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Short id;
 
     @Column(length = 50, nullable = false)
     private String address;
