@@ -5,7 +5,7 @@ import lombok.*;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-@ToString(callSuper = true)
+@ToString(callSuper = true, exclude = {"managerStaff"})
 @Entity
 @Table(name = "store", schema = "movie"
         , indexes = {@Index(name = "idx_fk_address_id", columnList = "address_id")}

@@ -1,7 +1,6 @@
 package com.javarush.movie;
 
-import com.javarush.movie.entity.Film;
-import com.javarush.movie.entity.Language;
+import com.javarush.movie.entity.*;
 import com.javarush.movie.entity.type.Rating;
 import com.javarush.movie.entity.type.SpecialFeature;
 import lombok.extern.log4j.Log4j2;
@@ -11,40 +10,40 @@ import org.hibernate.query.Query;
 
 import java.util.Set;
 
-
 @Log4j2
 public class Solution {
 
     public static void main(String[] args) {
+        Solution solution = new Solution();
+        Customer customer = solution.createCustomer();
+        System.out.println(customer);
+    }
 
+    private Customer createCustomer() {
         try (Session session = MySessionFactory.getSessionFactory().openSession()) {
-//            Language language1 = new Language();
-//            language1.setName("ru");
-//            Language language2 = new Language();
-//            language2.setName("en");
-//
-//            Transaction transaction1 = session.beginTransaction();
-//            session.persist(language1);
-//            session.persist(language2);
-//            transaction1.commit();
-//
-            Query<Language> query = session.createQuery("select l from Language l", Language.class);
-            query.list().forEach(log::info);
-//
-//
-//            Film film = new Film();
-//            film.setTitle("film2");
-//            film.setLanguage(language1);
-//            film.setRating(Rating.PG_13);
-//            film.setSpecialFeatures(Set.of(SpecialFeature.COMMENTARIES, SpecialFeature.TRAILERS));
-//
-//            Transaction transaction2 = session.beginTransaction();
-//            session.persist(film);
-//            transaction2.commit();
-//
-//            System.out.println(film);
-//
-        }
+            Transaction transaction = session.beginTransaction();
 
+            Customer customer = new Customer();
+
+            Query<Store> queryStore = session.createQuery("select s from Store s", Store.class);
+            Store store = queryStore.getResultList().get(0);
+            System.out.println(store);
+
+            Query<Address> queryAddress = session.createQuery("select a from Address a", Address.class);
+            Address address = queryAddress.getResultList().get(0);
+            System.out.println(address);
+
+            customer.setStore(store);
+            customer.setFirstName("Sergey");
+            customer.setLastName("Medvedev");
+            customer.setEmail("medvedev@grade-plus.ru");
+            customer.setAddress(address);
+            customer.setActive(true);
+
+            session.persist(customer);
+            transaction.commit();
+
+            return customer;
+        }
     }
 }
