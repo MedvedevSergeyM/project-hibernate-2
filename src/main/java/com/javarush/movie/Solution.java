@@ -8,6 +8,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 
+import java.time.LocalDateTime;
 import java.util.Set;
 
 @Log4j2
@@ -15,8 +16,11 @@ public class Solution {
 
     public static void main(String[] args) {
         Solution solution = new Solution();
+
         Customer customer = solution.createCustomer();
-        System.out.println(customer);
+//        System.out.println(customer);
+
+        solution.returnInventory();
     }
 
     private Customer createCustomer() {
@@ -26,12 +30,12 @@ public class Solution {
             Customer customer = new Customer();
 
             Query<Store> queryStore = session.createQuery("select s from Store s", Store.class);
-            Store store = queryStore.getResultList().get(0);
-            System.out.println(store);
+            queryStore.setMaxResults(1);
+            Store store = queryStore.getSingleResult();
 
             Query<Address> queryAddress = session.createQuery("select a from Address a", Address.class);
-            Address address = queryAddress.getResultList().get(0);
-            System.out.println(address);
+            queryAddress.setMaxResults(1);
+            Address address = queryAddress.getSingleResult();
 
             customer.setStore(store);
             customer.setFirstName("Sergey");
@@ -44,6 +48,21 @@ public class Solution {
             transaction.commit();
 
             return customer;
+        }
+    }
+
+    private void returnInventory() {
+        try (Session session = MySessionFactory.getSessionFactory().openSession()) {
+            Transaction transaction = session.beginTransaction();
+
+            Query<Rental> queryRental = session.createQuery("select r from Rental r where r.returnDate is null", Rental.class);
+            queryRental.setMaxResults(1);
+            Rental rental = queryRental.getSingleResult();
+
+            rental.setReturnDate(LocalDateTime.now());
+            session.update(rental);
+
+            transaction.commit();
         }
     }
 }

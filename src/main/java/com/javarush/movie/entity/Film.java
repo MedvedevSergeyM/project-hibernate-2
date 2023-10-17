@@ -4,6 +4,7 @@ import com.javarush.movie.entity.type.converter.RatingConverter;
 import com.javarush.movie.entity.type.converter.SpecialFeaturesConverter;
 import com.javarush.movie.entity.type.Rating;
 import com.javarush.movie.entity.type.SpecialFeature;
+import com.javarush.movie.entity.type.converter.YearConverter;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -19,7 +20,7 @@ import java.util.Set;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-@ToString(callSuper = true)
+@ToString(callSuper = true, exclude = {"categories", "actors"})
 @Entity
 @Table(name = "film", schema = "movie", indexes = {
         @Index(name = "idx_fk_language_id", columnList = "language_id"),
@@ -40,6 +41,7 @@ public class Film extends LastUpdate {
     private String description;
 
     @Column(name = "release_year", columnDefinition = "year")
+    @Convert(converter = YearConverter.class)
     private Year year;
 
     @ManyToOne(cascade = CascadeType.ALL)
@@ -108,9 +110,9 @@ public class Film extends LastUpdate {
         if (replacementCost == null) {
             replacementCost = new BigDecimal("19.99");
         }
-        if (rating == null) {
-            rating = Rating.G;
-        }
+//        if (rating == null) {
+//            rating = Rating.G;
+//        }
     }
 
 }
