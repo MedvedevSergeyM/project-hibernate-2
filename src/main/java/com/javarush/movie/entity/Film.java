@@ -19,7 +19,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 @Data
-@EqualsAndHashCode(callSuper = true)
+@EqualsAndHashCode(callSuper = true, exclude = {"categories", "actors"})
 @ToString(callSuper = true, exclude = {"categories", "actors"})
 @Entity
 @Table(name = "film", schema = "movie", indexes = {

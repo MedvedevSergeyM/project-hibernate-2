@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Data
+@EqualsAndHashCode(exclude = {"film"})
 @ToString(exclude = {"film"})
 @Entity
 @Table(name = "film_text", schema = "movie"
